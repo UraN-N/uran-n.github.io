@@ -1,1 +1,0 @@
-# uran-n.github.io

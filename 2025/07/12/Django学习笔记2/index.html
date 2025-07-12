@@ -17,7 +17,7 @@
   <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_0khxww3tj3q9';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)","zh-CN":"复制成功 (*^▽^*)","zh-TW":"複製成功 (*^▽^*)","ja":"コピー成功 (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ","zh-CN":"复制失败 (ﾟ⊿ﾟ)ﾂ","zh-TW":"複製失敗 (ﾟ⊿ﾟ)ﾂ","ja":"コピー失敗 (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
   
   <title>
-    Django学习笔记 |
+    Django学习笔记2 |
     
     Ura&#39;s Blog
   </title>
@@ -35,15 +35,15 @@
 
   
   
-    <meta name="description" content="1、HTTP协议http协议http协议通常用在浏览器和web服务器之间传输信息，在http3之前（不包括http3）都是基于TCP协议，所以要进行通讯，客户端必须先和服务端创建TCP连接，客户端先发送http请求，服务端接收http请求后发送http响应给客户端，特别注意服务端不会主动发送信息给客户端 http请求消息http常见请求方法主要有GET、POST、PUT和DELETE，包括在请求行">
+    <meta name="description" content="HTTP请求的url路径Django开发中有如下三个重要概念：url路由、http请求处理、ORM数据库操作 创建项目app一个项目中包含多个app，每一个app具有相对独立的功能。一个app 本质上 就是一个 Python 包， 里面包含了一些应用相关的代码文件。 在终端中可以通过执行命令来自动创建app的常用文件 1python manage.py startapp app名称  执行完指令会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django学习笔记">
-<meta property="og:url" content="http://example.com/2025/07/11/Django%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="Django学习笔记2">
+<meta property="og:url" content="http://example.com/2025/07/12/Django%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/index.html">
 <meta property="og:site_name" content="Ura&#39;s Blog">
-<meta property="og:description" content="1、HTTP协议http协议http协议通常用在浏览器和web服务器之间传输信息，在http3之前（不包括http3）都是基于TCP协议，所以要进行通讯，客户端必须先和服务端创建TCP连接，客户端先发送http请求，服务端接收http请求后发送http响应给客户端，特别注意服务端不会主动发送信息给客户端 http请求消息http常见请求方法主要有GET、POST、PUT和DELETE，包括在请求行">
+<meta property="og:description" content="HTTP请求的url路径Django开发中有如下三个重要概念：url路由、http请求处理、ORM数据库操作 创建项目app一个项目中包含多个app，每一个app具有相对独立的功能。一个app 本质上 就是一个 Python 包， 里面包含了一些应用相关的代码文件。 在终端中可以通过执行命令来自动创建app的常用文件 1python manage.py startapp app名称  执行完指令会">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-11T13:15:18.000Z">
-<meta property="article:modified_time" content="2025-07-12T15:12:52.236Z">
+<meta property="article:published_time" content="2025-07-12T13:45:43.000Z">
+<meta property="article:modified_time" content="2025-07-12T15:23:22.366Z">
 <meta property="article:author" content="Ura">
 <meta property="article:tag" content="后端">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
           
         </picture>
         
-          <img  fetchpriority="high" src="/images/banner.webp" alt="Django学习笔记">
+          <img  fetchpriority="high" src="/images/banner.webp" alt="Django学习笔记2">
         
       
     
@@ -202,7 +202,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">Django学习笔记</h1>
+            <h1 data-aos="slide-up">Django学习笔记2</h1>
           </a>
         
       
@@ -229,7 +229,7 @@
   <h3 class="toc-title">Contents</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81HTTP%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">1、HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.1.</span> <span class="toc-text">http协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF"><span class="toc-number">1.0.2.</span> <span class="toc-text">http请求消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF"><span class="toc-number">1.0.3.</span> <span class="toc-text">http响应消息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">2、创建项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Django"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装Django</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="toc-number">2.0.2.</span> <span class="toc-text">创建项目目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C-Django-web%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.0.3.</span> <span class="toc-text">运行 Django web服务</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82%E7%9A%84url%E8%B7%AF%E5%BE%84"><span class="toc-number">1.</span> <span class="toc-text">HTTP请求的url路径</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AEapp"><span class="toc-number">1.0.1.</span> <span class="toc-text">创建项目app</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E7%BB%99%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">1.0.2.</span> <span class="toc-text">返回页面内容给浏览器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#url%E8%B7%AF%E7%94%B1%E5%92%8C%E8%B7%AF%E7%94%B1%E5%AD%90%E8%A1%A8"><span class="toc-number">1.0.3.</span> <span class="toc-text">url路由和路由子表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.0.4.</span> <span class="toc-text">创建数据库</span></a></li></ol></li></ol></li></ol>
       
   </div>
 </div>
@@ -321,12 +321,12 @@
   
 </aside>
 
-          <section id="main"><article id="post-Django学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+          <section id="main"><article id="post-Django学习笔记2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner" data-aos="fade-up">
     <div class="article-meta">
       <div class="article-date">
   <span class="article-date-link" data-aos="zoom-in">
-    <time datetime="2025-07-11T13:15:18.000Z" itemprop="datePublished">2025-07-11</time>
+    <time datetime="2025-07-12T13:45:43.000Z" itemprop="datePublished">2025-07-12</time>
     <time style="display: none;" id="post-update-time">2025-07-12</time>
   </span>
 </div>
@@ -340,24 +340,36 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <h2 id="1、HTTP协议"><a href="#1、HTTP协议" class="headerlink" title="1、HTTP协议"></a>1、HTTP协议</h2><h4 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a><strong>http协议</strong></h4><p>http协议通常用在浏览器和web服务器之间传输信息，在http3之前（不包括http3）都是基于TCP协议，所以要进行通讯，客户端必须先和服务端创建TCP连接，客户端先发送http请求，服务端接收http请求后发送http响应给客户端，特别注意服务端不会主动发送信息给客户端</p>
-<h4 id="http请求消息"><a href="#http请求消息" class="headerlink" title="http请求消息"></a><strong>http请求消息</strong></h4><p>http常见请求方法主要有GET、POST、PUT和DELETE，包括在<strong>请求行</strong>内。GET请求是直接从服务器获取资源，POST请求是添加资源信息给服务器处理，通常是发送表单给服务器，具体发送的信息通常在HTTP消息体中；PUT请求是请求服务器更新资源信息，DELETE请求是请求服务器删除资源信息。请求行中除了请求方式，还包含url和http协议的版本。<strong>请求头</strong>中以 名字：值 的方式存放一些基本的希望被服务器接收的信息。<strong>消息体</strong>中包含一些不能在请求头中保存的信息，如POST请求中想要添加的信息、发送文件的文件数据等</p>
-<h4 id="http响应消息"><a href="#http响应消息" class="headerlink" title="http响应消息"></a>http响应消息</h4><p>在<strong>状态行</strong>中包含http协议版本、状态码和状态描述语，状态码表示了服务端对客户端请求的处理结果，2xx基本是请求没问题、3xx是请求的地址发生了改变、4xx表示客户端请求有错误、5xx基本上是服务端的问题；响应消息中的响应头和消息体和请求消息中的差不多</p>
-<h2 id="2、创建项目"><a href="#2、创建项目" class="headerlink" title="2、创建项目"></a>2、创建项目</h2><h4 id="安装Django"><a href="#安装Django" class="headerlink" title="安装Django"></a>安装Django</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django</span><br></pre></td></tr></table></figure>
+        <h2 id="HTTP请求的url路径"><a href="#HTTP请求的url路径" class="headerlink" title="HTTP请求的url路径"></a>HTTP请求的url路径</h2><p>Django开发中有如下三个重要概念：<strong>url路由</strong>、<strong>http请求处理</strong>、<strong>ORM数据库操作</strong></p>
+<h4 id="创建项目app"><a href="#创建项目app" class="headerlink" title="创建项目app"></a>创建项目app</h4><p>一个项目中包含多个app，每一个app具有相对独立的功能。一个app 本质上 就是一个 Python 包， 里面包含了一些应用相关的代码文件。</p>
+<p>在终端中可以通过执行命令来自动创建app的常用文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp app名称</span><br></pre></td></tr></table></figure>
 
-<h4 id="创建项目目录"><a href="#创建项目目录" class="headerlink" title="创建项目目录"></a>创建项目目录</h4><p>在目录下打开终端</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin.exe startproject 项目名(不需要引号)</span><br></pre></td></tr></table></figure>
+<p>执行完指令会出现如下的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">D:\PROGRAM FILES\PYCHARM项目\DJANGO学习\STUDY\TEXT</span><br><span class="line">│  admin.py</span><br><span class="line">│  apps.py</span><br><span class="line">│  models.py</span><br><span class="line">│  tests.py</span><br><span class="line">│  views.py      【处理http请求的代码，创建函数】</span><br><span class="line">│  __init__.py</span><br><span class="line">│</span><br><span class="line">└─migrations</span><br><span class="line">        __init__.py</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>django-admin.exe就是个工具，帮助创建项目中该有的文件，运行好后就会创建如下几个文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D:\PROGRAM FILES\PYCHARM项目\DJANGO学习\STUDY</span><br><span class="line">│  manage.py          【工具脚本，用于项目管理，执行项目操作】</span><br><span class="line">│</span><br><span class="line">└─Study</span><br><span class="line">        asgi.py</span><br><span class="line">        settings.py   【项目的配置文件】【和数据库有关】</span><br><span class="line">        urls.py		  【声明了前端发过来的各种http请求，分别由哪些函数处理】【url路由设置文件】</span><br><span class="line">        wsgi.py		  【接口文件】</span><br><span class="line">        __init__.py</span><br></pre></td></tr></table></figure>
+<h4 id="返回页面内容给浏览器"><a href="#返回页面内容给浏览器" class="headerlink" title="返回页面内容给浏览器"></a>返回页面内容给浏览器</h4><p>在项目文件夹下 urls.py 文件存放了url地址和处理函数的对应，函数存放在 view.py 文件中，需要注意的是 urls.py 中设置的url末尾的斜杠在调试中不可省去（好像在当前版本下可以不用在意）</p>
+<p>这时在 views.py 文件中加入函数和导入的文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">listorders</span>(<span class="params">request</span>):</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;这是文字&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<h4 id="运行-Django-web服务"><a href="#运行-Django-web服务" class="headerlink" title="运行 Django web服务"></a>运行 Django web服务</h4><p>在<strong>项目名</strong>目录下打开终端，第一次要输入：</p>
+<p>在项目目录下的<strong>urls.py</strong>文件中加入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> text.views <span class="keyword">import</span> listorders</span><br><span class="line"></span><br><span class="line">path(<span class="string">&#x27;text/orders/&#x27;</span>, listorders)</span><br></pre></td></tr></table></figure>
+
+<p>再在浏览器中输入 127.0.0.1&#x2F;text&#x2F;orders&#x2F; 就会出现 listorders 函数中的文字了</p>
+<h4 id="url路由和路由子表"><a href="#url路由和路由子表" class="headerlink" title="url路由和路由子表"></a>url路由和路由子表</h4><p>url路由设置的入口文件是项目的目录下的 urls.py ，上述的 path(‘text&#x2F;orders&#x2F;‘, listorders) 就是一条路由记录，告诉服务端当前端的请求url地址是 text&#x2F;orders&#x2F; 时用 views.py 里的函数 listorders 来处理</p>
+<p>在一般的普通项目中会存在很多路由，这时可以用路由子表来简化总路由文件，在单个app目录下创建 urls.py 在该 urls.py 里面按照总路由文件的格式填写，则总路由文件可以简化为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    </span><br><span class="line">    path(<span class="string">&#x27;student/&#x27;</span>, include(text.urls)) <span class="comment">#所有student目录下的路由全部按照text子路由表来</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>在app目录下的 urls.py </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> text.view <span class="keyword">import</span> listorders, listorders1, listorders2</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;orders/&#x27;</span>, listorders)</span><br><span class="line">    path(<span class="string">&#x27;orders1/&#x27;</span>, listorders1)</span><br><span class="line">    path(<span class="string">&#x27;orders2/&#x27;</span>, listorders2)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><p>后端开发基本都需要操作数据，包括数据的 存储、查询、修改、删除。通常这些都是通过数据库来完成的，目前最广泛使用的是关系数据库，如mysql和postgresql，但这两个数据库都需要安装数据库服务系统和客户端库，这里使用简单的数据库sqlite（sqlite 没有 独立的数据库服务进程，数据操作被做成库直接供应用程序调用。 Django中可以直接使用，无须先搭建数据服务。）</p>
+<p>关于数据库的配置在项目目录下的 setting.py 中，默认使用sqlite，数据库文件的默认名称是 db.sqlite3 </p>
+<p>在最开始调试项目的时候已经输入过指令、</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
 
-<p>接下来就可以输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 127.0.0.1:80</span><br></pre></td></tr></table></figure>
-
-<p>这时用浏览器打开127.0.0.1:80就可以看到Django调试页面了，调试的时候不要关闭终端</p>
+<p>项目文件夹下就会自动生成 db.sqlite3 文件，要打开该文件需要下载 SQLiteStudio软件</p>
+<p>在该文件里面有许多表，这些表都是 Django缺省设置中， 需要的一些 基本表。</p>
 
       
     </div>
@@ -379,23 +391,23 @@
   
   <nav id="article-nav" data-aos="fade-up">
     
-      
-      <div class="article-nav-link-wrap article-nav-link-left">
-        
-          
-          
-            <img data-src="https://d-sketon.top/img/backimg/bg1.jpg" data-sizes="auto" alt="Django学习笔记2" class="lazyload">
-          
-        
-        <a href="/2025/07/12/Django%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/"></a>
-        <div class="article-nav-caption">Newer</div>
-        <h3 class="article-nav-title">
-          
-            Django学习笔记2
-          
-        </h3>
-      </div>
     
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="https://d-sketon.top/img/backimg/bg1.jpg" data-sizes="auto" alt="Django学习笔记" class="lazyload">
+        
+      
+      <a href="/2025/07/11/Django%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          Django学习笔记
+        
+      </h3>
+    </div>
     
   </nav>
 
@@ -474,7 +486,7 @@
   <h3 class="toc-title">Contents</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81HTTP%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">1、HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.1.</span> <span class="toc-text">http协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF"><span class="toc-number">1.0.2.</span> <span class="toc-text">http请求消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF"><span class="toc-number">1.0.3.</span> <span class="toc-text">http响应消息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">2、创建项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Django"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装Django</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="toc-number">2.0.2.</span> <span class="toc-text">创建项目目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C-Django-web%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.0.3.</span> <span class="toc-text">运行 Django web服务</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82%E7%9A%84url%E8%B7%AF%E5%BE%84"><span class="toc-number">1.</span> <span class="toc-text">HTTP请求的url路径</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AEapp"><span class="toc-number">1.0.1.</span> <span class="toc-text">创建项目app</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E7%BB%99%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-number">1.0.2.</span> <span class="toc-text">返回页面内容给浏览器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#url%E8%B7%AF%E7%94%B1%E5%92%8C%E8%B7%AF%E7%94%B1%E5%AD%90%E8%A1%A8"><span class="toc-number">1.0.3.</span> <span class="toc-text">url路由和路由子表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.0.4.</span> <span class="toc-text">创建数据库</span></a></li></ol></li></ol></li></ol>
       
   </div>
 </div>
@@ -631,13 +643,13 @@
       <script data-pjax>
         window.REIMU_POST = {
           author: "Ura",
-          title: "Django学习笔记",
-          url: "http://example.com/2025/07/11/Django%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/",
+          title: "Django学习笔记2",
+          url: "http://example.com/2025/07/12/Django%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/",
           excerpt: "",
           description: "",
-          stripContent: "1、HTTP协议http协议http协议通常用在浏览器和web服务器之间传输信息，在http3之前（不包括http3）都是基于TCP协议，所以要进行通讯，客户端必须先和服务端创建TCP连接，客户端先发送http请求，服务端接收http请求后发送http响应给客户端，特别注意服务端不会主动发送信息给客户端 http请求消息http常见请求方法主要有GET、POST、PUT和DELETE，包括在请求行内。GET请求是直接从服务器获取资源，POST请求是添加资源信息给服务器处理，通常是发送表单给服务器",
-          date: "Fri Jul 11 2025 21:15:18 GMT+0800",
-          updated: "Sat Jul 12 2025 23:12:52 GMT+0800",
+          stripContent: "HTTP请求的url路径Django开发中有如下三个重要概念：url路由、http请求处理、ORM数据库操作 创建项目app一个项目中包含多个app，每一个app具有相对独立的功能。一个app 本质上 就是一个 Python 包， 里面包含了一些应用相关的代码文件。 在终端中可以通过执行命令来自动创建app的常用文件 1python manage.py startapp app名称  执行完指令会出现如下的文件： 1234567891011D:\PROGRAM FILES\PYCHARM项目\D",
+          date: "Sat Jul 12 2025 21:45:43 GMT+0800",
+          updated: "Sat Jul 12 2025 23:23:22 GMT+0800",
           cover: "/images/banner.webp",
         };
       </script>
